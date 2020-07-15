@@ -1,44 +1,42 @@
-// 9x19mm Sub Machinegun
+// Mp5
 
 WeaponData
 {
 	// Weapon data is loaded by both the Game and Client DLLs.
-	"BuiltRightHanded" "0" 
-        "AllowFlipping" "1"  
-	"printname"	"AK47"
-	"viewmodel"				"models/weapons/v_smg1.mdl"
-	"playermodel"			"models/weapons/w_smg1.mdl"	//FIXME: 
+	"printname"	"My weapon from zombiHello :)"
+	"viewmodel"				"models/weapons/v_rif_ak47.mdl"
+	"playermodel"			"models/weapons/w_rif_ak47.mdl"	//FIXME: 
 	"anim_prefix"			"smg2"
 	"bucket"				"2"
 	"bucket_position"		"2"
 	"bucket_360"			"1"
 	"bucket_position_360"	"0"
 
-	"clip_size"				"30"
+	"clip_size"				"45"
 	"clip2_size"			"-1"
 
-	"default_clip"			"40"
+	"default_clip"			"45"
 	"default_clip2"			"-1"
 
-	"primary_ammo"			"Mp5"
-	"secondary_ammo"		"None"
+	"primary_ammo"			"Mp5" // тип патронов для первичной атаки
+	"secondary_ammo"		"None" // тип патронов для вторичной атаки, можно поставить None чтоб их небыло
 
-	"weight"				"25"
+	"weight"				"3"
 	"rumble"			"3"
 	"item_flags"			"0"
 
 	// Sounds for the weapon. There is a max of 16 sounds per category (i.e. max 16 "single_shot" sounds)
 	SoundData
 	{
-		"reload"			"Weapon_MP5.Reload"
-		"reload_npc"		"Weapon_MP5.NPC_Reload"
-		"empty"				"Weapon_MP5.Empty"
-		"single_shot"		"Weapon_MP5.Single"
-		"single_shot_npc"	"Weapon_MP5.NPC_Single"
-		"special1"			"Weapon_MP5.Special1"
-		"special2"			"Weapon_MP5.Special2"
-		"double_shot"		"Weapon_MP5.Double"
-		"burst"				"Weapon_MP5.Burst"
+		"reload"			"Weapon_SMG1.Reload"
+		"reload_npc"		"Weapon_SMG1.NPC_Reload"
+		"empty"				"Weapon_SMG1.Empty"
+		"single_shot"		"Weapon_SMG1.Single"
+		"single_shot_npc"	"Weapon_SMG1.NPC_Single"
+		"special1"			"Weapon_SMG1.Special1"
+		"special2"			"Weapon_SMG1.Special2"
+		"double_shot"		"Weapon_SMG1.Double"
+		"burst"				"Weapon_SMG1.Burst"
 	}
 
 	// Weapon Sprite data is loaded by the Client DLL.
@@ -62,7 +60,7 @@ WeaponData
 		"ammo"
 		{
 				"font"		"WeaponIconsSmall"
-				"character"	"p"
+				"character"	"r"
 		}
 		"ammo2"
 		{
@@ -81,19 +79,6 @@ WeaponData
 				"y"			"48"
 				"width"		"24"
 				"height"	"24"
-		}
-	}
-	ModelBounds
-	{
-		Viewmodel
-		{
-			Mins	"-9 -3 -13"
-			Maxs	"30 11 0"
-		}
-		World
-		{
-			Mins	"-9 -9 -9"
-			Maxs	"30 9 7"
 		}
 	}
 }

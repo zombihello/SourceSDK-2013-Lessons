@@ -115,13 +115,13 @@ ConVar	sk_plr_dmg_pistol		( "sk_plr_dmg_pistol","0", FCVAR_REPLICATED );
 ConVar	sk_npc_dmg_pistol		( "sk_npc_dmg_pistol","0", FCVAR_REPLICATED);
 ConVar	sk_max_pistol			( "sk_max_pistol","0", FCVAR_REPLICATED);
 
-ConVar	sk_plr_dmg_smg1			( "sk_plr_dmg_smg1","0", FCVAR_REPLICATED );
-ConVar	sk_npc_dmg_smg1			( "sk_npc_dmg_smg1","0", FCVAR_REPLICATED);
-ConVar	sk_max_smg1				( "sk_max_smg1","0", FCVAR_REPLICATED);
-
 ConVar	sk_plr_dmg_mp5			( "sk_plr_dmg_mp5", "0", FCVAR_REPLICATED );
 ConVar	sk_npc_dmg_mp5			( "sk_npc_dmg_mp5", "0", FCVAR_REPLICATED );
 ConVar	sk_max_mp5				( "sk_max_mp5", "0", FCVAR_REPLICATED );
+
+ConVar	sk_plr_dmg_smg1			( "sk_plr_dmg_smg1","0", FCVAR_REPLICATED );
+ConVar	sk_npc_dmg_smg1			( "sk_npc_dmg_smg1","0", FCVAR_REPLICATED);
+ConVar	sk_max_smg1				( "sk_max_smg1","0", FCVAR_REPLICATED);
 
 // FIXME: remove these
 //ConVar	sk_plr_dmg_flare_round	( "sk_plr_dmg_flare_round","0", FCVAR_REPLICATED);
@@ -1816,7 +1816,8 @@ CAmmoDef *GetAmmoDef()
 		def.AddAmmoType("SniperPenetratedRound", DMG_BULLET | DMG_SNIPER, TRACER_NONE,			"sk_dmg_sniper_penetrate_plr", "sk_dmg_sniper_penetrate_npc", "sk_max_sniper_round", BULLET_IMPULSE(150, 6000), 0 );
 		def.AddAmmoType("Grenade",			DMG_BURN,					TRACER_NONE,			"sk_plr_dmg_grenade",		"sk_npc_dmg_grenade",		"sk_max_grenade",		0, 0);
 		def.AddAmmoType("Thumper",			DMG_SONIC,					TRACER_NONE,			10, 10, 2, 0, 0 );
-		def.AddAmmoType( "Mp5", DMG_BULLET, TRACER_LINE_AND_WHIZ, "sk_plr_dmg_mp5", "sk_npc_dmg_mp5", "sk_max_mp5", BULLET_IMPULSE( 150, 1225 ), 0 );
+		def.AddAmmoType( "Mp5",				DMG_BULLET,					TRACER_LINE_AND_WHIZ,	"sk_plr_dmg_mp5",			"sk_npc_dmg_mp5",			"sk_max_mp5",			BULLET_IMPULSE( 150, 1225 ), 0 );
+
 		def.AddAmmoType("Gravity",			DMG_CLUB,					TRACER_NONE,			0,	0, 8, 0, 0 );
 //		def.AddAmmoType("Extinguisher",		DMG_BURN,					TRACER_NONE,			0,	0, 100, 0, 0 );
 		def.AddAmmoType("Battery",			DMG_CLUB,					TRACER_NONE,			NULL, NULL, NULL, 0, 0 );

@@ -1,4 +1,4 @@
-//========= Copyright zombiHello, All rights reserved. ============//
+//========= Copyright Valve Corporation, All rights reserved. ============//
 //
 // Purpose: 
 //
@@ -26,7 +26,6 @@ extern ConVar    sk_plr_dmg_smg1_grenade;
 class CWeaponMP5 : public CHLSelectFireMachineGun
 {
 	DECLARE_DATADESC();
-
 public:
 	DECLARE_CLASS( CWeaponMP5, CHLSelectFireMachineGun );
 
@@ -34,43 +33,45 @@ public:
 
 	DECLARE_SERVERCLASS();
 
-	void								Precache();
-	void								AddViewKick();
-	void								SecondaryAttack();
+	void	Precache( void );
+	void	AddViewKick( void );
+	void	SecondaryAttack( void );
 
-	int									GetMinBurst() { return 2; }
-	int									GetMaxBurst() { return 5; }
+	int		GetMinBurst() { return 2; }
+	int		GetMaxBurst() { return 10; }
 
-	virtual void						Equip( CBaseCombatCharacter* pOwner );
-	bool								Reload();
+	virtual void Equip( CBaseCombatCharacter* pOwner );
+	bool	Reload( void );
 
-	float								GetFireRate() { return 0.075f; }	// 13.3hz
-	int									CapabilitiesGet() { return bits_CAP_WEAPON_RANGE_ATTACK1; }
-	int									WeaponRangeAttack2Condition( float flDot, float flDist );
-	Activity							GetPrimaryAttackActivity();
+	float	GetFireRate( void ) { return 0.12386f; }	// ~22hz
+	int		CapabilitiesGet( void ) { return bits_CAP_WEAPON_RANGE_ATTACK1; }
+	int		WeaponRangeAttack2Condition( float flDot, float flDist );
+	Activity	GetPrimaryAttackActivity( void );
 
-	virtual const Vector&				GetBulletSpread()
+	virtual const Vector& GetBulletSpread( void )
 	{
 		static const Vector cone = VECTOR_CONE_5DEGREES;
 		return cone;
 	}
 
-	const WeaponProficiencyInfo_t*		GetProficiencyValues();
+	const WeaponProficiencyInfo_t* GetProficiencyValues();
 
-	void								FireNPCPrimaryAttack( CBaseCombatCharacter* pOperator, Vector& vecShootOrigin, Vector& vecShootDir );
-	void								Operator_ForceNPCFire( CBaseCombatCharacter* pOperator, bool bSecondary );
-	void								Operator_HandleAnimEvent( animevent_t* pEvent, CBaseCombatCharacter* pOperator );
+	void FireNPCPrimaryAttack( CBaseCombatCharacter* pOperator, Vector& vecShootOrigin, Vector& vecShootDir );
+	void Operator_ForceNPCFire( CBaseCombatCharacter* pOperator, bool bSecondary );
+	void Operator_HandleAnimEvent( animevent_t* pEvent, CBaseCombatCharacter* pOperator );
 
 	DECLARE_ACTTABLE();
 
 protected:
-	Vector				m_vecTossVelocity;
-	float				m_flNextGrenadeCheck;
+
+	Vector	m_vecTossVelocity;
+	float	m_flNextGrenadeCheck;
 };
 
 IMPLEMENT_SERVERCLASS_ST( CWeaponMP5, DT_WeaponMP5 )
 END_SEND_TABLE()
 
+// weapon_mp5 - название нашей энтити
 LINK_ENTITY_TO_CLASS( weapon_mp5, CWeaponMP5 );
 PRECACHE_WEAPON_REGISTER( weapon_mp5 );
 
@@ -105,7 +106,7 @@ acttable_t	CWeaponMP5::m_acttable[] =
 		{ ACT_RUN_AGITATED,				ACT_RUN_AIM_RIFLE,				false },//always aims
 
 	// Readiness activities (aiming)
-		{ ACT_IDLE_AIM_RELAXED,			ACT_IDLE_SMG1_RELAXED,			false },//never aims
+		{ ACT_IDLE_AIM_RELAXED,			ACT_IDLE_SMG1_RELAXED,			false },//never aims	
 		{ ACT_IDLE_AIM_STIMULATED,		ACT_IDLE_AIM_RIFLE_STIMULATED,	false },
 		{ ACT_IDLE_AIM_AGITATED,		ACT_IDLE_ANGRY_SMG1,			false },//always aims
 
@@ -135,18 +136,19 @@ acttable_t	CWeaponMP5::m_acttable[] =
 
 IMPLEMENT_ACTTABLE( CWeaponMP5 );
 
+//=========================================================
 CWeaponMP5::CWeaponMP5()
 {
-	m_fMinRange1 = 0;// No minimum range.
+	m_fMinRange1 = 0;// No minimum range. 
 	m_fMaxRange1 = 1400;
 
 	m_bAltFiresUnderwater = false;
 }
 
 //-----------------------------------------------------------------------------
-// Purpose:
+// Purpose: 
 //-----------------------------------------------------------------------------
-void CWeaponMP5::Precache()
+void CWeaponMP5::Precache( void )
 {
 	UTIL_PrecacheOther( "grenade_ar2" );
 
@@ -171,7 +173,7 @@ void CWeaponMP5::Equip( CBaseCombatCharacter* pOwner )
 }
 
 //-----------------------------------------------------------------------------
-// Purpose:
+// Purpose: 
 //-----------------------------------------------------------------------------
 void CWeaponMP5::FireNPCPrimaryAttack( CBaseCombatCharacter* pOperator, Vector& vecShootOrigin, Vector& vecShootDir )
 {
@@ -187,7 +189,7 @@ void CWeaponMP5::FireNPCPrimaryAttack( CBaseCombatCharacter* pOperator, Vector& 
 }
 
 //-----------------------------------------------------------------------------
-// Purpose:
+// Purpose: 
 //-----------------------------------------------------------------------------
 void CWeaponMP5::Operator_ForceNPCFire( CBaseCombatCharacter* pOperator, bool bSecondary )
 {
@@ -202,7 +204,7 @@ void CWeaponMP5::Operator_ForceNPCFire( CBaseCombatCharacter* pOperator, bool bS
 }
 
 //-----------------------------------------------------------------------------
-// Purpose:
+// Purpose: 
 //-----------------------------------------------------------------------------
 void CWeaponMP5::Operator_HandleAnimEvent( animevent_t* pEvent, CBaseCombatCharacter* pOperator )
 {
@@ -261,7 +263,7 @@ void CWeaponMP5::Operator_HandleAnimEvent( animevent_t* pEvent, CBaseCombatChara
 }
 
 //-----------------------------------------------------------------------------
-// Purpose:
+// Purpose: 
 // Output : Activity
 //-----------------------------------------------------------------------------
 Activity CWeaponMP5::GetPrimaryAttackActivity( void )
@@ -300,13 +302,13 @@ bool CWeaponMP5::Reload( void )
 }
 
 //-----------------------------------------------------------------------------
-// Purpose:
+// Purpose: 
 //-----------------------------------------------------------------------------
 void CWeaponMP5::AddViewKick( void )
 {
-#define	EASY_DAMPEN			2.3f
+#define	EASY_DAMPEN			0.5f
 #define	MAX_VERTICAL_KICK	5.0f	//Degrees
-#define	SLIDE_LIMIT			0.11f	//Seconds
+#define	SLIDE_LIMIT			2.0f	//Seconds
 
 	//Get the view kick
 	CBasePlayer* pPlayer = ToBasePlayer( GetOwner() );
@@ -318,17 +320,79 @@ void CWeaponMP5::AddViewKick( void )
 }
 
 //-----------------------------------------------------------------------------
-// Purpose:
+// Purpose: 
 //-----------------------------------------------------------------------------
 void CWeaponMP5::SecondaryAttack( void )
-{}
+{
+	// Only the player fires this way so we can cast
+	CBasePlayer* pPlayer = ToBasePlayer( GetOwner() );
+
+	if ( pPlayer == NULL )
+		return;
+
+	//Must have ammo
+	if ( ( pPlayer->GetAmmoCount( m_iSecondaryAmmoType ) <= 0 ) || ( pPlayer->GetWaterLevel() == 3 ) )
+	{
+		SendWeaponAnim( ACT_VM_DRYFIRE );
+		BaseClass::WeaponSound( EMPTY );
+		m_flNextSecondaryAttack = gpGlobals->curtime + 0.5f;
+		return;
+	}
+
+	if ( m_bInReload )
+		m_bInReload = false;
+
+	// MUST call sound before removing a round from the clip of a CMachineGun
+	BaseClass::WeaponSound( WPN_DOUBLE );
+
+	pPlayer->RumbleEffect( RUMBLE_357, 0, RUMBLE_FLAGS_NONE );
+
+	Vector vecSrc = pPlayer->Weapon_ShootPosition();
+	Vector	vecThrow;
+	// Don't autoaim on grenade tosses
+	AngleVectors( pPlayer->EyeAngles() + pPlayer->GetPunchAngle(), &vecThrow );
+	VectorScale( vecThrow, 1000.0f, vecThrow );
+
+	//Create the grenade
+	QAngle angles;
+	VectorAngles( vecThrow, angles );
+	CGrenadeAR2* pGrenade = ( CGrenadeAR2* ) Create( "grenade_ar2", vecSrc, angles, pPlayer );
+	pGrenade->SetAbsVelocity( vecThrow );
+
+	pGrenade->SetLocalAngularVelocity( RandomAngle( -400, 400 ) );
+	pGrenade->SetMoveType( MOVETYPE_FLYGRAVITY, MOVECOLLIDE_FLY_BOUNCE );
+	pGrenade->SetThrower( GetOwner() );
+	pGrenade->SetDamage( sk_plr_dmg_smg1_grenade.GetFloat() );
+
+	SendWeaponAnim( ACT_VM_SECONDARYATTACK );
+
+	CSoundEnt::InsertSound( SOUND_COMBAT, GetAbsOrigin(), 1000, 0.2, GetOwner(), SOUNDENT_CHANNEL_WEAPON );
+
+	// player "shoot" animation
+	pPlayer->SetAnimation( PLAYER_ATTACK1 );
+
+	// Decrease ammo
+	pPlayer->RemoveAmmo( 1, m_iSecondaryAmmoType );
+
+	// Can shoot again immediately
+	m_flNextPrimaryAttack = gpGlobals->curtime + 0.5f;
+
+	// Can blow up after a short delay (so have time to release mouse button)
+	m_flNextSecondaryAttack = gpGlobals->curtime + 1.0f;
+
+	// Register a muzzleflash for the AI.
+	pPlayer->SetMuzzleFlashTime( gpGlobals->curtime + 0.5 );
+
+	m_iSecondaryAttacks++;
+	gamestats->Event_WeaponFired( pPlayer, false, GetClassname() );
+}
 
 #define	COMBINE_MIN_GRENADE_CLEAR_DIST 256
 
 //-----------------------------------------------------------------------------
-// Purpose:
-// Input  : flDot -
-//			flDist -
+// Purpose: 
+// Input  : flDot - 
+//			flDist - 
 // Output : int
 //-----------------------------------------------------------------------------
 int CWeaponMP5::WeaponRangeAttack2Condition( float flDot, float flDist )
@@ -359,7 +423,7 @@ int CWeaponMP5::WeaponRangeAttack2Condition( float flDot, float flDist )
 	Vector vecEnemyLKP = npcOwner->GetEnemyLKP();
 	if ( !( pEnemy->GetFlags() & FL_ONGROUND ) && pEnemy->GetWaterLevel() == 0 && vecEnemyLKP.z > ( GetAbsOrigin().z + WorldAlignMaxs().z ) )
 	{
-		//!!!BUGBUG - we should make this check movetype and make sure it isn't FLY? Players who jump a lot are unlikely to
+		//!!!BUGBUG - we should make this check movetype and make sure it isn't FLY? Players who jump a lot are unlikely to 
 		// be grenaded.
 		// don't throw grenades at anything that isn't on the ground!
 		return COND_NONE;
@@ -438,7 +502,7 @@ const WeaponProficiencyInfo_t* CWeaponMP5::GetProficiencyValues()
 	{
 		{ 7.0,		0.75	},
 		{ 5.00,		0.75	},
-		{ 3.0,		0.85	},
+		{ 10.0 / 3.0, 0.75	},
 		{ 5.0 / 3.0,	0.75	},
 		{ 1.00,		1.0		},
 	};

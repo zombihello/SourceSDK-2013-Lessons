@@ -70,6 +70,7 @@ public:
 LINK_ENTITY_TO_CLASS( item_box_mp5rounds, CItem_BoxMP5Rounds );
 LINK_ENTITY_TO_CLASS( item_ammo_mp5, CItem_BoxMP5Rounds );
 
+// взято из Source SDK Wiki
 // ========================================================================
 //	>> Large Box 9mm MP5 Rounds
 // ========================================================================
